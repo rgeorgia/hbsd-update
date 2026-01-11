@@ -82,7 +82,6 @@ function config.get_config_data()
 		}
 
 		local hbsd_update_conf_path = "/etc/hbsd-update.conf"
-		local hbsd_update_conf_path_local = "../hbsd-update.conf"
 		local ok, err = read_hbsd_update_conf(hbsd_update_conf_path, config_file)
 
 		if not ok then

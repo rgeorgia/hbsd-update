@@ -38,10 +38,11 @@ kernel=""
 
 # dnssec variable is yes/no since it's user-visible via
 # hbsd-update.conf(5).
-dnssec="yes"
+dnssec="yes" # Don't need this since it's part of config.get_config_data
 dnssec_key="/usr/share/keys/hbsd-update/trusted/dnssec.key"
 revoke_dir="/usr/share/keys/hbsd-update/revoked"
 
+# Default CLI argument values
 fetchonly=0
 downloadonly=0
 ignorever=0
