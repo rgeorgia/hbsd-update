@@ -34,7 +34,7 @@ Transfer the same functionality of the hbsd-update and hbsd-update-build from sh
 |File|Description|
 |----|-----------|
 |hbsd-update.lua|main file|
-|config.lua     |Read hbsd-update.conf file and other configuration stuff (don't judge the skimpy descrition)|
+|config.lua     |Read hbsd-update.conf file and other configuration stuff (don't judge the skimpy description)|
 |log.lua        |Logging. Write log to /var/log/hbsd-update.log|
 |cli.lua        |Handle command-line arguments|
 |env-vars.lua   |House all major system commands and environment variables|
