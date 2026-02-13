@@ -87,11 +87,14 @@ end
 function config.get_config_data(file_location)
 
 		local config_file = {
-			dnsrec      = "$(uname -m).master.14-stable.hardened.hardenedbsd.updates.hardenedbsd.org",
+			-- dnsrec      = "$(uname -m).master.14-stable.hardened.hardenedbsd.updates.hardenedbsd.org",
+			dnsrec      = "",
 			kernel      = "HARDENEDBSD",
 			capath      = "/usr/share/keys/hbsd-update/trusted",
-			branch      = "hardened/14-stable/master",
-			baseurl     = "https://updates.hardenedbsd.org/pub/HardenedBSD/updates/${branch}/$(uname -m)",
+			-- branch      = "hardened/14-stable/master",
+			-- baseurl     = "https://updates.hardenedbsd.org/pub/HardenedBSD/updates/${branch}/$(uname -m)",
+			branch      = "",
+			baseurl     = "",
 			dnssec      = "yes",
 			force_ipv4  = "no",
 			force_ipv6  = "no",

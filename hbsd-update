@@ -1048,12 +1048,18 @@ check_sanity() {
 		exit 1
 	fi
 
+	# Read the hbsd-update.conf file
 	. ${configfile}
 
+	# local_resolver and remote_resolver default to 0, unless the -R option is called
+	# then both are set to one.
+	# Question: why the check? Where would local or remote be set to a different value?
 	if [ ${local_resolver} != ${remote_resolver} ]; then
 		remote_resolver=${local_resolver}
 	fi
 
+	# Check of baseurl is missing from config_file data.
+	# Any other critical key/values that are required?
 	if [ -z "${baseurl}" ]; then
 		debug_print "[-] Missing setting: baseurl"
 		exit 1
@@ -1069,6 +1075,7 @@ check_sanity() {
 		exit 1
 	fi
 
+	# This check is addressed in the cli.lua module.
 	if [ ${fetchonly} -gt 0 ] && [ ${nodownload} -gt 0 ]; then
 		debug_print "[-] Fetch only and no download options are mutually exclusive"
 		exit 1
