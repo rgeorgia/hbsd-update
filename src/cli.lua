@@ -75,7 +75,7 @@ local function parse_args(argv)
         j = "jail_name",
         K = "backupkern",
         k = "kernel",
-        r = "bootstrap_root",
+        r = "bootstrap_root", -- mountpoint
         t = "tmpdir",
         v = "version",
     }

@@ -24,11 +24,15 @@ print(opts.no_dnssec)
 -- opts.config_path already defaults to /etc/hbsd-update.conf unless overridden by -c
 log.info("Using config: " .. opts.config_path)
 
-config_data, err = config.get_config_data()
+config_data, err = config.get_config_data(opts.config_path)
 if err ~= nil then
+	print(err)
 	log.err(err)
 	log.err("Exiting..." .. status_code.app)
 	os.exit(status_code.app)
 end
+
+print(config_data.dnsrec)
+print(config_data.baseurl)
 
 os.exit(status_code.ok)

@@ -68,7 +68,23 @@ local function log_config_table(log, tbl, title)
     end
 end
 
-function config.get_config_data()
+local function get_arch()
+	local handle = io.popen("uname -m")
+	if not handle then return nil end
+		local result = handle:read("*l")
+		handle:close()
+	return result
+end
+
+local function get_kernel_version()
+	local handle = io.popen("uname -v")
+	if not handle then return nil end
+		local result = handle:read("*l")
+		handle:close()
+	return result
+end
+
+function config.get_config_data(file_location)
 
 		local config_file = {
 			dnsrec      = "$(uname -m).master.14-stable.hardened.hardenedbsd.updates.hardenedbsd.org",
@@ -81,13 +97,20 @@ function config.get_config_data()
 			force_ipv6  = "no",
 		}
 
-		local hbsd_update_conf_path = "/etc/hbsd-update.conf"
+		local hbsd_update_conf_path = file_location or "/etc/hbsd-update.conf"
 		local ok, err = read_hbsd_update_conf(hbsd_update_conf_path, config_file)
 
 		if not ok then
 			log.debug("/etc/hbsd-update.conf not found: " .. err)
 			return nil, err
 		end
+		-- substitute uname -m with uname -m value
+		local dnsrec = config_file.dnsrec
+		config_file.dnsrec = dnsrec:gsub("%$%(uname %-m%)", get_arch())
+		local baseurl = config_file.baseurl
+		config_file.baseurl = baseurl:gsub("%$%(uname %-m%)", get_arch())
+		config_file.baseurl = config_file.baseurl:gsub("%${branch}", config_file.branch)
+
 		log_config_table(log, config_file, "Loaded hbsd-update configuration:")
 		
 		return config_file, nil
