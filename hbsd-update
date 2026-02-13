@@ -1095,6 +1095,7 @@ check_sanity() {
 		fi
 	fi
 
+	# This check is addressed in the cli.lua module.
 	if is_true "${force_ipv4}" && is_true "${force_ipv6}"; then
 		debug_print "[-] force_ipv6 is mutually exclusive with force_ipv4"
 		exit 1
